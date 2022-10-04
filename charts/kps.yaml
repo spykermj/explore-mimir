@@ -1,0 +1,17 @@
+prometheus:
+  prometheusSpec:
+    replicas: 2
+    remoteWrite:
+      - url: http://mimir-nginx.mimir.svc:80/api/v1/push
+        basicAuth:
+          username:
+            name: kubepromsecret
+            key: username
+          password:
+            name: kubepromsecret
+            key: password
+        headers:
+          "X-Scope-OrgID": "demo_tenant"
+    replicaExternalLabelName: "__replica__"
+    externalLabels:
+      cluster: "kind-cluster"
