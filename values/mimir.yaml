@@ -1,0 +1,22 @@
+nginx:
+  basicAuth:
+    enabled: true
+    existingSecret: "mimir-credentials"
+# distributor:
+#   extraArgs:
+#     distributor.ha-tracker.etcd.password: "$(etcd-root-password)"
+mimir:
+  structuredConfig:
+    limits:
+      accept_ha_samples: true
+    distributor:
+      ha_tracker:
+        enable_ha_tracker: true
+        kvstore:
+          store: "consul"
+          consul:
+            host: "consul-server.consul:8500"
+# global:
+#   extraEnvFrom:
+#     - secretRef:
+#         name: "etcd"
