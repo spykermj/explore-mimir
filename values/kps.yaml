@@ -10,8 +10,6 @@ prometheus:
           password:
             name: kubepromsecret
             key: password
-        headers:
-          "X-Scope-OrgID": "demo_tenant"
     replicaExternalLabelName: "__replica__"
     externalLabels:
       cluster: "kind-cluster"

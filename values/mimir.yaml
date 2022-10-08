@@ -2,9 +2,13 @@ nginx:
   basicAuth:
     enabled: true
     existingSecret: "mimir-credentials"
-# distributor:
-#   extraArgs:
-#     distributor.ha-tracker.etcd.password: "$(etcd-root-password)"
+  nginxConfig:
+    httpSnippet: |
+      map $remote_user $http_x_scope_orgid {
+        default /;
+        demo_user demo_tenant;
+      }
+
 mimir:
   structuredConfig:
     limits:
@@ -16,7 +20,3 @@ mimir:
           store: "consul"
           consul:
             host: "consul-server.consul:8500"
-# global:
-#   extraEnvFrom:
-#     - secretRef:
-#         name: "etcd"
