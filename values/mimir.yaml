@@ -1,14 +1,3 @@
-nginx:
-  basicAuth:
-    enabled: true
-    existingSecret: "mimir-credentials"
-  nginxConfig:
-    httpSnippet: |
-      map $remote_user $http_x_scope_orgid {
-        default /;
-        demo_user demo_tenant;
-      }
-
 mimir:
   structuredConfig:
     limits:
@@ -20,3 +9,15 @@ mimir:
           store: "consul"
           consul:
             host: "consul-server.consul:8500"
+gateway:
+  enabledNonEnterprise: true
+  nginx:
+    basicAuth:
+      enabled: true
+      existingSecret: mimir-credentials
+    config:
+      httpSnippet: |
+        map $remote_user $http_x_scope_orgid {
+          default $remote_user;
+          "" "anonymous";
+        }

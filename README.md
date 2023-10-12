@@ -9,5 +9,5 @@ separately.
 That said, here are the minimum required features for a viable Mimir POC.
 
 1. Multi-tenant operating mode - done
-1. De-duplication if incoming HA prometheus data - this means using consul or etc
+1. De-duplication if incoming HA prometheus data - this means using consul or etc - done with consul
 1. Basic authentication for sending data to Mimir - done
